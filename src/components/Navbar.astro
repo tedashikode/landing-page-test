@@ -1,0 +1,23 @@
+---
+import { Image } from "astro:assets";
+import Logo from "../assets/logo.svg";
+---
+
+<!-- the children show only grow to fill the space available in the parent containers, and not exceed their parent container's size -->
+<header class="bg-accent w-full h-max">
+  <nav class=" text-foreground/80 px-12 flex justify-between">
+    <div class="flex items-center">
+      <Image src={Logo} alt={"Logo for the Oysloe website"} />
+      <p class="text-foreground text-4xl">Oysloe</p>
+    </div>
+    <menu class="flex [&>li]:flex-shrink items-center gap-4 pr-12">
+      <li>Why OYSLOE</li>
+      <li>How It works</li>
+      <li>Boost your Biz</li>
+      <li>Start your Journey</li>
+      <li>Simple Pricing</li>
+      <li>Join as Seller</li>
+      <li>Contact Us</li>
+    </menu>
+  </nav>
+</header>

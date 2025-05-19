@@ -1,1 +1,15 @@
+/* src/styles/global.css */
 @import "tailwindcss";
+
+@theme {
+  /* colors */
+  --color-primary: oklch(0.9 0.1728 153.34);
+  --color-secondary: oklch(0.31 0.0195 229.78);
+  --color-background: oklch(1 0 0);
+  --color-foreground: oklch(0.4 0.0329 242.02);
+  --color-accent: oklch(0.97 0.0401 162.46);
+
+  --font-inter: "Inter", sans-serif;
+  /* --font-size-base: 1rem; */
+}
+
