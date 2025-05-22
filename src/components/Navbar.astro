@@ -1,16 +1,32 @@
 ---
 import { Image } from "astro:assets";
 import Logo from "../assets/logo.svg";
+import Hamburger from "../assets/hambuger.svg";
 ---
 
 <!-- the children show only grow to fill the space available in the parent containers, and not exceed their parent container's size -->
-<header class="bg-accent w-full h-max">
-  <nav class=" text-foreground/80 px-12 flex justify-between">
-    <div class="flex items-center">
-      <Image src={Logo} alt={"Logo for the Oysloe website"} />
-      <p class="text-foreground text-4xl">Oysloe</p>
+<header class=" md:bg-accent md:border md:rounded-[1.25rem] md:border-accent w-full h-max py-4">
+  <!-- on mobile screens, the nav bar should only show the green Oysloe text and a hamburger icon -->
+  <nav class="text-foreground/80 flex md:w-full items-center justify-between lg:px-12">
+    <!-- on mobile screens, the logo should be centered and the hamburger icon should be close to the right edge of the nav menu -->
+    <div class="flex items-center m-auto md:m-0">
+      <Image
+      src={Logo}
+      alt={"Logo for the Oysloe e-commerce landing page"}
+      class={"hidden md:block"}
+      />
+      <!-- the size of the p tag should not exceed the size of the its containing div parent -->
+      <p class="text-secondary md:text-foreground text-4xl">Oysloe</p>
     </div>
-    <menu class="flex [&>li]:flex-shrink items-center gap-4 pr-12">
+    <div class="flex md:hidden">
+      <Image
+        src={Hamburger}
+        alt={"Hamburger icon for navigation on smaller screens"}
+      />
+    </div>
+    <menu
+      class="hidden md:flex md:flex-auto md:max-w-max md:items-center md:gap-4 md:pr-4"
+    >
       <li>Why OYSLOE</li>
       <li>How It works</li>
       <li>Boost your Biz</li>
