@@ -1,39 +1,142 @@
 ---
 import { Image } from "astro:assets";
 import Logo from "../assets/logo.svg";
-import Hamburger from "../assets/hambuger.svg";
+import Hamburger from "../assets/combined_hamburger.svg";
+
+const menuItems = [
+  { name: "Why OYSLOE", href: "#why-oysloe" },
+  { name: "How It works", href: "#how-it-works" },
+  { name: "Start your Journey", href: "#start-your-journey" },
+  { name: "Simple Pricing", href: "#simple-pricing" },
+  { name: "Join as Seller", href: "#join-as-seller" },
+  { name: "Contact Us", href: "#contact-us" },
+];
 ---
 
 <!-- the children show only grow to fill the space available in the parent containers, and not exceed their parent container's size -->
-<header class=" md:bg-accent md:border md:rounded-[1.25rem] md:border-accent w-full h-max py-4">
+<header
+  class="md:bg-accent md:border md:rounded-[1.25rem] md:border-accent w-full h-max py-4 mb-4"
+>
+  <!-- calculate the height of the header -->
   <!-- on mobile screens, the nav bar should only show the green Oysloe text and a hamburger icon -->
-  <nav class="text-foreground/80 flex md:w-full items-center justify-between lg:px-12">
+  <nav
+    class="text-foreground/80 flex md:w-full items-center justify-between lg:px-12"
+  >
     <!-- on mobile screens, the logo should be centered and the hamburger icon should be close to the right edge of the nav menu -->
     <div class="flex items-center m-auto md:m-0">
       <Image
-      src={Logo}
-      alt={"Logo for the Oysloe e-commerce landing page"}
-      class={"hidden md:block"}
+        src={Logo}
+        alt={"Logo for the Oysloe e-commerce landing page"}
+        class={"hidden md:block"}
       />
       <!-- the size of the p tag should not exceed the size of the its containing div parent -->
       <p class="text-secondary md:text-foreground text-4xl">Oysloe</p>
     </div>
-    <div class="flex md:hidden">
+    <div class="flex cursor-pointer md:hidden">
       <Image
         src={Hamburger}
         alt={"Hamburger icon for navigation on smaller screens"}
       />
     </div>
+    <!-- there should be an indicator when a user selects a menu item -->
+    <!-- when a user clicks on a list item, the indicator should be below that list item, could be a bottom border below that list item or a pseudo bottom border -->
     <menu
-      class="hidden md:flex md:flex-auto md:max-w-max md:items-center md:gap-4 md:pr-4"
+      class="hidden md:flex md:items-center md:gap-4 md:pr-4 text-nowrap"
+      id="nav-menu"
     >
-      <li>Why OYSLOE</li>
-      <li>How It works</li>
-      <li>Boost your Biz</li>
-      <li>Start your Journey</li>
-      <li>Simple Pricing</li>
-      <li>Join as Seller</li>
-      <li>Contact Us</li>
+      {
+        menuItems.map((item) => (
+          // how do i ensure the the list items don't get bigger that their parent element which is the menu element?
+          // calculate the space available in the parent element and share it amongst the list items?
+          <li class="relative">
+            <a href={item.href} data-href={item.href}>
+              {item.name}
+            </a>
+          </li>
+        ))
+      }
     </menu>
   </nav>
 </header>
+
+<script>
+  // when user clicks on a list item in the menu, the respective section should be programmatically scrolled into view, with the nav bar still in view, however, if the the user scrolls themselves the nav bar should be out of view
+  document.addEventListener("DOMContentLoaded", () => {
+    const menu = document.getElementById("nav-menu");
+    const listItems = menu?.querySelectorAll("li");
+    const sections = document.querySelectorAll("section");
+
+    //when a user clicks the list item on the menu bar, scroll to that corresponding section
+    highlightSectionOnLinkClick(listItems);
+
+    // when a user scrolls to a section, highlight the corresponding link on the menu bar
+    highlightSectionOnUserScroll(listItems, sections);
+  });
+
+  function highlightSectionOnLinkClick(linksToSections) {
+    linksToSections?.forEach((item) => {
+      item.addEventListener("click", () => {
+        linksToSections.forEach((i) => {
+          i.classList.remove("active-indicator");
+        });
+
+        // Add classes to the clicked item
+        item.classList.add("active-indicator");
+      });
+    });
+  }
+
+  // indicator shifts as the screen is being scrolled... Where the indicator point is an indication of which section of the screen you've scrolled to or viewing.
+
+  //check where the user has scrolled to.
+  // if the area they have scrolled to belongs to a specific section,
+  // indicate that on the navbar. how do i indicate that on the navbar?
+  function highlightSectionOnUserScroll(linksToSections, sections) {
+    const intersectionOptions = {
+      root: null,
+      threshold: 0.5,
+    };
+
+    let sectionId;
+
+    const intersectionObserver = new IntersectionObserver((entries) => {
+      // Find the entry with the largest intersectionRatio
+      let maxEntry = entries.reduce((max, entry) => {
+        return entry.intersectionRatio > max.intersectionRatio ? entry : max;
+      }, entries[0]);
+
+      if (maxEntry && maxEntry.isIntersecting) {
+        sectionId = maxEntry.target.id;
+
+        console.log("Current section: " + sectionId);
+
+        // look for corresponding link to section
+        linksToSections.forEach((link) => {
+          const a = link.querySelector("a");
+
+          // if they have matching hrefs then highlight the section on the navbar
+          if (a && a.getAttribute("href") === `#${sectionId}`) {
+            //highlight section on navbar menu
+            linksToSections.forEach((i) => {
+              i.classList.remove("active-indicator");
+              link.classList.add("active-indicator");
+            });
+          }
+        });
+      }
+    }, intersectionOptions);
+
+    sections.forEach((section) => {
+      intersectionObserver.observe(section);
+    });
+
+    // Helper: build threshold array for smooth ratio updates
+    function buildThresholdList() {
+      let thresholds = [];
+      for (let i = 0; i <= 100; i++) {
+        thresholds.push(i / 100);
+      }
+      return thresholds;
+    }
+  }
+</script>
