@@ -13,3 +13,37 @@
   /* --font-size-base: 1rem; */
 }
 
+/* :root {
+  --header-height: calc(
+    clamp(4rem, 8vw, 6.25rem) + (var(--header-py) * 2)
+  );
+  --header-py: 1rem;
+  --header-offset-top: 1rem;
+  --header-offset-bottom: 1rem;
+  --full-header-height: calc(
+    var(--header-height) + var(--header-offset-top) + var(--header-offset-bottom)
+  );
+}
+
+@media (min-width: 768px) {
+  html {
+    scroll-padding-top: var(--full-header-height);
+    scroll-behavior: smooth;
+  }
+} */
+
+/* In your global CSS or Tailwind config */
+.active-indicator::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2rem; /* or your desired offset */
+  width: 2rem;
+  height: 0.25rem; /* 1 unit in Tailwind h-1 */
+  background-color: var(--color-secondary);
+  margin-left: auto;
+  margin-right: auto;
+  border: solid transparent;
+  border-radius: 0.25rem;
+}

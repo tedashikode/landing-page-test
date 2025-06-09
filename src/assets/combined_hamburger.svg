@@ -1,0 +1,50 @@
+<svg
+  width="41"
+  height="38"
+  viewBox="0 0 41 38"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <!-- Background Rectangle -->
+  <!-- This is the content from your first SVG -->
+  <rect
+    x="0"
+    y="0"
+    width="41"
+    height="38"
+    rx="10"
+    fill="#DEFEED"
+  />
+
+  <!-- Hamburger Icon Group - Nested and Positioned -->
+  <!--
+    Original Hamburger viewBox: 0 0 16 16
+    Original Rectangle viewBox: 0 0 41 38
+
+    To center the 16x16 hamburger within the 41x38 rectangle's coordinate system:
+    Translate X: (41 - 16) / 2 = 12.5
+    Translate Y: (38 - 16) / 2 = 11
+  -->
+  <g transform="translate(12.5 11)">
+    <!-- The mask definition from the hamburger SVG -->
+    <!--
+      IMPORTANT: When combining SVGs into a single file, all IDs must be unique
+      within that file. The original mask ID was `mask0_11827_2013`.
+      If you only use this SVG file once per page (e.g., as an <img> src),
+      you can keep a static unique ID. If you plan to embed this SVG directly
+      into HTML multiple times, you'd need to manually change this ID for each
+      instance or use a component that generates a unique ID.
+      For a single file, a simple descriptive static ID like 'combinedHamburgerMask' is fine.
+    -->
+    <mask id="combinedHamburgerMask" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
+      <path d="M16 0H0V16H16V0Z" fill="white"/>
+    </mask>
+    <!-- The group applying the mask -->
+    <g mask="url(#combinedHamburgerMask)">
+      <!-- All the path elements for the hamburger lines -->
+      <path d="M15.3333 7.33398H0.666667C0.298667 7.33398 0 7.63198 0 8.00065C0 8.36865 0.298667 8.66732 0.666667 8.66732H15.3333C15.7013 8.66732 16 8.36865 16 8.00065C16 7.63198 15.7013 7.33398 15.3333 7.33398Z" fill="#04A70B"/>
+      <path d="M15.3333 2.66748H0.666667C0.298667 2.66748 0 2.96615 0 3.33415C0 3.70281 0.298667 4.00081 0.666667 4.00081H15.3333C15.7013 4.00081 16 3.70281 16 3.33415C16 2.96615 15.7013 2.66748 15.3333 2.66748Z" fill="#04A70B"/>
+      <path d="M15.3333 12.0007H0.666667C0.298667 12.0007 0 12.2994 0 12.6674C0 13.0354 0.298667 13.3341 0.666667 13.3341H15.3333C15.7013 13.3341 16 13.0354 16 12.6674C16 12.2994 15.7013 12.0007 15.3333 12.0007Z" fill="#04A70B"/>
+    </g>
+  </g>
+</svg>
