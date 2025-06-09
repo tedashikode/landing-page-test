@@ -1,0 +1,56 @@
+---
+import { Image } from "astro:assets";
+import Logo from "../assets/logo.svg";
+---
+
+<section
+  class="flex flex-col h-dvh items-center justify-end mb-24 bg-amber-600"
+  id="why-oysloe"
+>
+  <div class="flex flex-col w-max text-center outline outline-amber-300">
+    <div>
+      <p class="text-secondary text-3xl md:text-6xl font-bold">
+        Shop-Sell-Rent.
+      </p>
+      <p class="text-foreground text-2xl md:text-5xl font-normal mb-4">
+        Make your life easier than <br />
+        before. Go smart !
+      </p>
+    </div>
+    <div class="flex items-center justify-end gap-4">
+      <div class="flex flex-col bg-primary border rounded-[1rem] border-primary">
+        <div class="flex">
+          <Image
+            src={Logo}
+            alt={"Logo for the Oysloe e-commerce landing page"}
+            class={"hidden md:block"}
+          />
+          <Image
+            src={Logo}
+            alt={"Logo for the Oysloe e-commerce landing page"}
+            class={"hidden md:block"}
+          />
+          <Image
+            src={Logo}
+            alt={"Logo for the Oysloe e-commerce landing page"}
+            class={"hidden md:block"}
+          />
+          <Image
+            src={Logo}
+            alt={"Logo for the Oysloe e-commerce landing page"}
+            class={"hidden md:block"}
+          />
+        </div>
+        <p>100+ enrolled already</p>
+      </div>
+      <div class="flex items-center px-4 bg-primary border rounded-[1rem] border-primary">
+        <button class="mr-10"> Get started now </button>
+        <Image
+          src={Logo}
+          alt={"Logo for the Oysloe e-commerce landing page"}
+          class={"hidden md:block"}
+        />
+      </div>
+    </div>
+  </div>
+</section>
